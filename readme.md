@@ -101,6 +101,7 @@ docker/
 ### Opção 1 — Com Docker (recomendado)
 
 1. Renomeie o arquivo `.env.example` para `.env` e o preencha com a sua chave de API:
+
    ```
    OPENAI_API_KEY="sua-chave-aqui"
    ```
@@ -130,6 +131,7 @@ docker/
    ```
 
 6. **Renomeie** o arquivo `.env.example` para `.env` e o preencha com a sua chave de API:
+
    ```
    OPENAI_API_KEY="sua-chave-aqui"
    ```
