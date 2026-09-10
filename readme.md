@@ -1,7 +1,9 @@
 # CP04 – Edge com Agentes de IA
 
 **Disciplina:** Edge Computing
+
 **Curso:** Ciências da Computação – 2º Ano
+
 **Turma:** 2CCPH
 
 ## Integrantes
