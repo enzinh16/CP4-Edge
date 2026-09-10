@@ -2,17 +2,17 @@
 
 **Disciplina:** Edge Computing
 **Curso:** Ciências da Computação – 2º Ano
-**Turma:** [2CCPH]
+**Turma:** 2CCPH
 
 ## Integrantes
 
 | RM | Nome |
 |----|------|
-| [563761] | [Auro Vanetti] |
-| [562235] | [Bruno Soares de Santanna] |
-| [564177] | [Enzo Yokokura Araujo] |
-| [566434] | [Marco Antonio Ferreira Fonseca] |
-| [554911] | [Renan Mano Otero] |
+| 563761 | Auro Vanetti |
+| 562235 | Bruno Soares de Santanna |
+| 564177 | Enzo Yokokura Araujo |
+| 566434 | Marco Antonio Ferreira Fonseca |
+| 554911 | Renan Mano Otero |
 
 ## Objetivo
 
