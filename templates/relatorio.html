@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Monitoramento de Vegetação
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- CABEÇALHO -->
+
+        <header>
+
+            <div>
+
+                <h1>
+                    🌱 Monitoramento Vegetal
+                </h1>
+
+                <p>
+                    Grupo 11 — CP4
+                </p>
+
+            </div>
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                Sistema online
+
+            </div>
+
+        </header>
+
+
+        <!-- CARDS -->
+
+        <section class="cards">
+
+
+            <div class="card">
+
+                <span class="card-icon">
+                    📏
+                </span>
+
+                <div>
+
+                    <p>
+                        Altura média
+                    </p>
+
+                    <h2>
+
+                        {% if estatisticas %}
+                        {{ estatisticas.media }} cm
+                        {% else %}
+                        --
+                        {% endif %}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <span class="card-icon">
+                    ⬆️
+                </span>
+
+                <div>
+
+                    <p>
+                        Maior altura
+                    </p>
+
+                    <h2>
+
+                        {% if estatisticas %}
+                        {{ estatisticas.maxima }} cm
+                        {% else %}
+                        --
+                        {% endif %}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <span class="card-icon">
+                    ⬇️
+                </span>
+
+                <div>
+
+                    <p>
+                        Menor altura
+                    </p>
+
+                    <h2>
+
+                        {% if estatisticas %}
+                        {{ estatisticas.minima }} cm
+                        {% else %}
+                        --
+                        {% endif %}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <span class="card-icon">
+                    ⚠️
+                </span>
+
+                <div>
+
+                    <p>
+
+                        {% if estatisticas %}
+                        Fora da especificação (> {{ estatisticas.limite_especificacao }} cm)
+                        {% else %}
+                        Fora da especificação
+                        {% endif %}
+
+                    </p>
+
+                    <h2>
+
+                        {% if estatisticas %}
+                        {{ estatisticas.percentual_fora }}%
+                        {% else %}
+                        --
+                        {% endif %}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- GRÁFICO -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        📊 Alturas detectadas
+                    </h2>
+
+                    <p>
+                        Últimas 50 medições recebidas
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas id="graficoAlturas"></canvas>
+
+            </div>
+
+        </section>
+
+
+        <!-- ANÁLISE -->
+
+        <section class="analysis-grid">
+
+
+            <div class="panel">
+
+                <div class="panel-header panel-header-flex">
+
+                    <h2>
+                        🤖 Análise da IA
+                    </h2>
+
+                    {% if estatisticas and estatisticas.destino %}
+
+                        {% if estatisticas.destino == 'sustentacao' %}
+                        <span class="badge badge-sustentacao">
+                            ⚠️ Direcionado à Sustentação
+                        </span>
+                        {% else %}
+                        <span class="badge badge-direcao">
+                            ✅ Direcionado à Direção
+                        </span>
+                        {% endif %}
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="ai-report">
+
+                    {% if relatorio %}
+
+                    {{ relatorio }}
+
+                    {% else %}
+
+                    <div class="empty">
+
+                        <span>
+                            🤖
+                        </span>
+
+                        <p>
+                            Aguardando 50 medições
+                            para gerar o relatório.
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- ESTATÍSTICAS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        📋 Estatísticas
+                    </h2>
+
+                </div>
+
+
+                <div class="statistics">
+
+
+                    <div class="stat">
+
+                        <span>
+                            Medições
+                        </span>
+
+                        <strong>
+
+                            {% if estatisticas %}
+                            {{ estatisticas.quantidade }}
+                            {% else %}
+                            0
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span>
+                            Média
+                        </span>
+
+                        <strong>
+
+                            {% if estatisticas %}
+                            {{ estatisticas.media }} cm
+                            {% else %}
+                            --
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span>
+                            Mediana
+                        </span>
+
+                        <strong>
+
+                            {% if estatisticas %}
+                            {{ estatisticas.mediana }} cm
+                            {% else %}
+                            --
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span>
+                            Mínima
+                        </span>
+
+                        <strong>
+
+                            {% if estatisticas %}
+                            {{ estatisticas.minima }} cm
+                            {% else %}
+                            --
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span>
+                            Máxima
+                        </span>
+
+                        <strong>
+
+                            {% if estatisticas %}
+                            {{ estatisticas.maxima }} cm
+                            {% else %}
+                            --
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span>
+                            Limite de especificação
+                        </span>
+
+                        <strong>
+
+                            {% if estatisticas %}
+                            {{ estatisticas.limite_especificacao }} cm
+                            {% else %}
+                            --
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span>
+                            Fora da especificação
+                        </span>
+
+                        <strong>
+
+                            {% if estatisticas %}
+                            {{ estatisticas.qtd_fora_espec }} de {{ estatisticas.quantidade }} ({{ estatisticas.percentual_fora }}%)
+                            {% else %}
+                            --
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span>
+                            Destino do relatório
+                        </span>
+
+                        <strong>
+
+                            {% if estatisticas and estatisticas.destino %}
+                                {% if estatisticas.destino == 'sustentacao' %}
+                                Sustentação
+                                {% else %}
+                                Direção
+                                {% endif %}
+                            {% else %}
+                            --
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+    <script>
+                async function carregarGrafico() {
+                    const resposta = await fetch("/api/alturas");
+                                const dados = await resposta.json();
+
+                                const alturas = dados.alturas;
+
+                                const ctx = document.getElementById("graficoAlturas");
+
+                                new Chart(ctx, {
+                                    type: "line",
+                                data: {
+                                    labels: alturas.map((_, index) => index + 1),
+
+                                datasets: [{
+                                    label: "Altura da vegetação (cm)",
+                                data: alturas,
+                                tension: 0.3,
+                                fill: true,
+                                pointRadius: 4,
+                                pointHoverRadius: 6
+                            }]
+                        },
+
+                                options: {
+                                    responsive: true,
+                                maintainAspectRatio: false,
+
+                                scales: {
+                                    y: {
+                                    beginAtZero: true,
+                                title: {
+                                    display: true,
+                                text: "Altura (cm)"
+                                    }
+                                },
+
+                                x: {
+                                    title: {
+                                    display: true,
+                                text: "Número da medição"
+                                    }
+                                }
+                            },
+
+                                plugins: {
+                                    legend: {
+                                    display: true
+                                }
+                            }
+                        }
+                    });
+                }
+
+                carregarGrafico();
+        </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+Flask
+paho-mqtt
+crewai
+python-dotenv
