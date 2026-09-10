@@ -60,7 +60,7 @@ Flask (app.py + templates/relatorio.html)
 
 ## Simulação do ESP32 (Wokwi / Velxio)
 
-O firmware do ESP32 foi simulado no Velxio (compatível com Wokwi), publicando
+O firmware do ESP32 foi simulado no Velxio, publicando
 alturas mockadas via MQTT para o mesmo broker e tópico usados pela aplicação:
 
 🔗 https://velxio.dev/weeblyenzo/cp4-edge-computing
@@ -100,8 +100,7 @@ docker/
 
 ### Opção 1 — Com Docker (recomendado)
 
-1. Crie um arquivo `.env` na raiz do projeto (mesma pasta do `dockerfile`)
-   com o conteúdo:
+1. Renomeie o arquivo `.env.example` para `.env` e o preencha com a sua chave de API:
    ```
    OPENAI_API_KEY="sua-chave-aqui"
    ```
@@ -121,17 +120,16 @@ docker/
    ```
 
 3. **Ative o ambiente virtual:**
-   - Windows (PowerShell):
-     ```powershell
-     .\venv\Scripts\Activate.ps1
-     ```
+   ```powershell
+   .\venv\Scripts\Activate.ps1
+   ```
 
 4. **Instale as dependências:**
    ```bash
    pip install -r requirements.txt
    ```
 
-5. **Crie o arquivo `.env`** na raiz do projeto com:
+6. **Renomeie** o arquivo `.env.example` para `.env` e o preencha com a sua chave de API:
    ```
    OPENAI_API_KEY="sua-chave-aqui"
    ```
